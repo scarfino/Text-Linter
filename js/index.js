@@ -13,28 +13,35 @@ let unnecessaryWords = ['extremely', 'literally', 'actually'];
 let storyWords = story.split(' ');
 
 //remove unnecessary words from story and create a new array called betterWords
-let betterWords = storyWords.filter(function(words){
-  return !unnecessaryWords.includes(words);
+let betterWords = storyWords.filter(function(words) {
+  return !unnecessaryWords.includes(words)
+});
+
+//count how many sentences are in the story
+let sentences = 0;
+storyWords.forEach(word => {
+  if (word[word.length - 1] === '.' || word[word.length - 1] === '!') {
+    sentences += 1;
+  }
 });
 
 //count how many times overusedWords were used
 var used = {};
 story.split(/[\s,]+/).forEach(item => {
-    if (overusedWords.indexOf(item) >= 0) {
-        if (!used[item]) {
-            used[item] = 1
-        }
-        else {
-         used[item] = used[item]+ 1
-        }
+  if (overusedWords.indexOf(item) >= 0) {
+    if (!used[item]) {
+      used[item] = 1
+    } else {
+      used[item] = used[item] + 1
     }
+  }
 });
 
 //display word, sentence and overused word counts.
-console.log("Text Linter")
-console.log("-----------------------------------")
-console.log(betterWords.length +(' total words'));
-console.log(+(' sentences'));
+console.log("Text Linter");
+console.log("-----------------------------------");
+console.log(betterWords.length + (' total words'));
+console.log(sentences + (' sentences'));
 console.log("Overused Words:", used);
-console.log("-----------------------------------")
+console.log("-----------------------------------");
 console.log(betterWords.join(' '));
